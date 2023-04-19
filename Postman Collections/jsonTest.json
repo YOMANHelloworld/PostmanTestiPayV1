@@ -67,7 +67,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "get fiction books",
 			"id": "53db1cbe-f90c-4cab-a537-58ccb0231bf6",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
