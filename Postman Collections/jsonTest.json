@@ -119,7 +119,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "get book by id",
 			"id": "f284674a-8329-4d82-984c-d80383c843a5",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
