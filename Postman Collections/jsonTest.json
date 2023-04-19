@@ -52,6 +52,18 @@
 				"url": "http://35.247.158.73:8280/services/BankingServiceOAuth2CloudProxy"
 			},
 			"response": []
+		},
+		{
+			"name": "New Request",
+			"id": "53db1cbe-f90c-4cab-a537-58ccb0231bf6",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }
