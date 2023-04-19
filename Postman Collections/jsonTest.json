@@ -74,7 +74,29 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://library-api.postmanlabs.com/books?genre=fiction&checkedOut =false",
+					"protocol": "https",
+					"host": [
+						"library-api",
+						"postmanlabs",
+						"com"
+					],
+					"path": [
+						"books"
+					],
+					"query": [
+						{
+							"key": "genre",
+							"value": "fiction"
+						},
+						{
+							"key": "checkedOut ",
+							"value": "false"
+						}
+					]
+				}
 			},
 			"response": []
 		}
