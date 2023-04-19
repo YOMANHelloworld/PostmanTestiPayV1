@@ -126,7 +126,26 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "https://library-api.postmanlabs.com/books/:id",
+					"protocol": "https",
+					"host": [
+						"library-api",
+						"postmanlabs",
+						"com"
+					],
+					"path": [
+						"books",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "29cd820f-82f9-4b45-a7f4-0924111b5b89"
+						}
+					]
+				}
 			},
 			"response": []
 		}
