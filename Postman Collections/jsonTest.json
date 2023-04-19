@@ -43,20 +43,7 @@
 		},
 		{
 			"name": "testpostmanv2",
-			"item": [
-				{
-					"name": "New Request",
-					"id": "c5127b14-605b-494f-8eb5-b7b28e87fb72",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				}
-			],
+			"item": [],
 			"id": "359e1fab-2a8c-4a19-a688-c40162c40d81"
 		},
 		{
