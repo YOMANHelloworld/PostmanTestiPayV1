@@ -43,7 +43,53 @@
 		},
 		{
 			"name": "testpostmanv2",
-			"item": [],
+			"item": [
+				{
+					"name": "customers",
+					"id": "3fd383ea-e270-4a5f-95bd-f998d015d13a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://35.247.155.160:80/ipay-core/api.ipay/support/17/customers/paginatedSearch?username=lahiru&offset=0&limit=10",
+							"protocol": "http",
+							"host": [
+								"35",
+								"247",
+								"155",
+								"160"
+							],
+							"port": "80",
+							"path": [
+								"ipay-core",
+								"api.ipay",
+								"support",
+								"17",
+								"customers",
+								"paginatedSearch"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "lahiru"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
 			"id": "359e1fab-2a8c-4a19-a688-c40162c40d81"
 		},
 		{
