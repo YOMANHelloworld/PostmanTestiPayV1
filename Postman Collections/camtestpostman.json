@@ -1,0 +1,35 @@
+{
+	"info": {
+		"_postman_id": "1e2f69be-a6b8-4c53-b6bd-2ebc9899c3f2",
+		"name": "CAM DEV",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Books",
+			"_postman_id": "02d977c8-fd03-4d30-915b-24ea7bb16c38",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://library-api.postmanlabs.com/books"
+			},
+			"response": []
+		},
+		{
+			"name": "test API",
+			"_postman_id": "5b91344e-45d8-4c05-9bf4-a9b6cca7f644",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "https://library-api.postmanlabs.com/books"
+			},
+			"response": []
+		}
+	]
+}
