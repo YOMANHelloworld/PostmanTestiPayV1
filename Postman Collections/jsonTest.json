@@ -150,7 +150,7 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "add a book",
 			"id": "c275ec0d-6e74-4617-88b0-9d5f28a705a3",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
