@@ -156,8 +156,24 @@
 				"disableBodyPruning": true
 			},
 			"request": {
-				"method": "GET",
-				"header": []
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "postmanrulz",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"title\": \"How To Kill\",\r\n  \"author\": \"Harper\",\r\n  \"genre\": \"fiction\",\r\n  \"yearPublished\": 1960\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://library-api.postmanlabs.com/books"
 			},
 			"response": []
 		}
