@@ -6,8 +6,13 @@
 	},
 	"item": [
 		{
+			"name": "New Folder",
+			"item": [],
+			"id": "05789930-3aa6-40c6-9304-d41762990d8e"
+		},
+		{
 			"name": "testv1",
-			"_postman_id": "4be1dbe5-de4f-4b3a-85c1-66620e212a91",
+			"id": "4be1dbe5-de4f-4b3a-85c1-66620e212a91",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -42,10 +47,7 @@
 							"key": "password",
 							"value": "ipay@123$"
 						}
-					],
-					"options": {
-						"urlencoded": {}
-					}
+					]
 				},
 				"url": "http://35.247.158.73:8280/services/BankingServiceOAuth2CloudProxy"
 			},
