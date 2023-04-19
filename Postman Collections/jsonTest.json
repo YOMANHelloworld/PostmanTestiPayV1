@@ -9,7 +9,7 @@
 			"name": "testpostman",
 			"item": [
 				{
-					"name": "https://clouddevapi.lolc.lk/iPay/ipayBankingModuleLOFC/1.0.0/loanAgainstFD/loanAgainstFdCreate",
+					"name": "loanAgainstFdCreate",
 					"id": "90d88d2d-8cb1-453c-84b4-c85d21df4253",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -115,6 +115,18 @@
 						}
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"id": "f284674a-8329-4d82-984c-d80383c843a5",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
