@@ -7,20 +7,7 @@
 	"item": [
 		{
 			"name": "testpostman",
-			"item": [
-				{
-					"name": "New Request",
-					"id": "d9f783d4-bdff-4c34-b5af-9926800a4839",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				}
-			],
+			"item": [],
 			"id": "05789930-3aa6-40c6-9304-d41762990d8e"
 		},
 		{
