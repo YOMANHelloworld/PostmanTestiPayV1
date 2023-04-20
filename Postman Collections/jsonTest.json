@@ -54,7 +54,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{localurlcallcenter}}17/customers/paginatedSearch?username=lahiru&offset=0&limit=10",
+							"raw": "{{localurlcallcenter}}17/customers/paginatedSearch?username=lahiru&offset=0&limit=9",
 							"host": [
 								"{{localurlcallcenter}}17"
 							],
@@ -73,7 +73,7 @@
 								},
 								{
 									"key": "limit",
-									"value": "10"
+									"value": "9"
 								}
 							]
 						}
