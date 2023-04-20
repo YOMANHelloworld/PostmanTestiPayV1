@@ -54,20 +54,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://35.247.155.160:80/ipay-core/api.ipay/support/17/customers/paginatedSearch?username=lahiru&offset=0&limit=10",
-							"protocol": "http",
+							"raw": "{{localurlcallcenter}}17/customers/paginatedSearch?username=lahiru&offset=0&limit=10",
 							"host": [
-								"35",
-								"247",
-								"155",
-								"160"
+								"{{localurlcallcenter}}17"
 							],
-							"port": "80",
 							"path": [
-								"ipay-core",
-								"api.ipay",
-								"support",
-								"17",
 								"customers",
 								"paginatedSearch"
 							],
