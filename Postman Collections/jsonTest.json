@@ -1,223 +1,223 @@
 {
-	"info": {
-		"_postman_id": "8f178b3b-ee17-4c11-8d59-fdb44770a1ec",
-		"name": "Sl DEV",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "testpostman",
-			"item": [
-				{
-					"name": "loanAgainstFdCreate",
-					"id": "90d88d2d-8cb1-453c-84b4-c85d21df4253",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer 7c2840d1-09f2-34bc-8101-5601213214e4"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Cookie",
-								"value": "incap_ses_966_2806735=kJITPy8o8HtHf99ws+xnDfljP2QAAAAA0ikqLXnPGhGu+DaKb2H97A==; visid_incap_2806735=3P8gf3UrSWeHOTo+P+KqsaDgL2QAAAAAQUIPAAAAAAAiF5ByP8M6/TOVT+1F2bux; visid_incap_2870965=aEynNGPJR4G5xchmk0Fm6JZqymMAAAAAQUIPAAAAAAC3cS8GEABrW9qGHPXNIFRP; visid_incap_2899458=C2DyWkncSkKEwST2AfJ5elDrF2QAAAAAQUIPAAAAAABCr+Lacn7g+c1+egYG1y/B"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\n    \"channel\": \"OC\",\n\n    \"subChannel\": \"Ipay\",\n\n    \"referenceNo\": \"DCBL807516311\",\n\n    \"productCode\": \"FD\",\n\n    \"subType\": \"F\",\n\n    \"branchCode\": \"999\",\n\n    \"meCode\": \"AWM\",\n\n    \"nicNo\": \"841972732V\",\n\n    \"paymentType\": \"00\",\n\n    \"paymentMethod\": \"S\",\n\n    \"sector\": \"1600\",\n\n    \"subSector\": \"09\",\n\n    \"term\": \"60\",\n\n    \"rate\": \"17.5\",\n\n    \"savingsAccountNo\": \"01410000020\",\n\n    \"purposeOfFacility\": \"working capital\",\n\n    \"eligibleAmount\": \"750000.00\",\n\n    \"setOffAmount\": \"0\",\n\n    \"payOutAmount\": \"4350.00\",\n\n    \"fdLoanAmount\": \"4350.0\",\n\n    \"approvalStatus\": \"PR\",\n\n    \"fdList\": [\n\n        {\n\n            \"fdNo\": \"702462\",\n\n            \"fdStartDate\": \"2018-05-12\",\n\n            \"fdEndDate\": \"2023-05-12\",\n\n            \"noOfMonths\": \"60\",\n\n            \"fdAmount\": \"1000000.00\",\n\n            \"eligibleAmount\": \"750000.00\",\n\n            \"lienAmount\": \"4350.00\"\n\n        }\n\n    ]\n\n}"
-						},
-						"url": "https://clouddevapi.lolc.lk/iPay/ipayBankingModuleLOFC/1.0.0/loanAgainstFD/loanAgainstFdCreate"
-					},
-					"response": []
-				}
-			],
-			"id": "05789930-3aa6-40c6-9304-d41762990d8e"
-		},
-		{
-			"name": "testpostmanv2",
-			"item": [
-				{
-					"name": "customers",
-					"id": "3fd383ea-e270-4a5f-95bd-f998d015d13a",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{localurlcallcenter}}17/customers/paginatedSearch?username=lahiru&offset=0&limit=9",
-							"host": [
-								"{{localurlcallcenter}}17"
-							],
-							"path": [
-								"customers",
-								"paginatedSearch"
-							],
-							"query": [
-								{
-									"key": "username",
-									"value": "lahiru"
-								},
-								{
-									"key": "offset",
-									"value": "0"
-								},
-								{
-									"key": "limit",
-									"value": "9"
-								}
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"id": "359e1fab-2a8c-4a19-a688-c40162c40d81"
-		},
-		{
-			"name": "testv1",
-			"id": "4be1dbe5-de4f-4b3a-85c1-66620e212a91",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/x-www-form-urlencoded"
-					}
-				],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"type": "text",
-							"key": "grant_type",
-							"value": "client_credentials"
-						},
-						{
-							"type": "text",
-							"key": "scope",
-							"value": "openid"
-						},
-						{
-							"type": "text",
-							"key": "username",
-							"value": "ipayuser"
-						},
-						{
-							"type": "text",
-							"key": "password",
-							"value": "ipay@123$"
-						}
-					]
-				},
-				"url": "http://35.247.158.73:8280/services/BankingServiceOAuth2CloudProxy"
-			},
-			"response": []
-		},
-		{
-			"name": "get fiction books",
-			"id": "53db1cbe-f90c-4cab-a537-58ccb0231bf6",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://library-api.postmanlabs.com/books?genre=fiction&checkedOut =false",
-					"protocol": "https",
-					"host": [
-						"library-api",
-						"postmanlabs",
-						"com"
-					],
-					"path": [
-						"books"
-					],
-					"query": [
-						{
-							"key": "genre",
-							"value": "fiction"
-						},
-						{
-							"key": "checkedOut ",
-							"value": "false"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get book by id",
-			"id": "f284674a-8329-4d82-984c-d80383c843a5",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://library-api.postmanlabs.com/books/:id",
-					"protocol": "https",
-					"host": [
-						"library-api",
-						"postmanlabs",
-						"com"
-					],
-					"path": [
-						"books",
-						":id"
-					],
-					"variable": [
-						{
-							"key": "id",
-							"value": "29cd820f-82f9-4b45-a7f4-0924111b5b89"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "add a book",
-			"id": "c275ec0d-6e74-4617-88b0-9d5f28a705a3",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "api-key",
-						"value": "postmanrulz",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"title\": \"How To Kill\",\r\n  \"author\": \"Harper\",\r\n  \"genre\": \"fiction\",\r\n  \"yearPublished\": 1960\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "https://library-api.postmanlabs.com/books"
-			},
-			"response": []
-		}
-	]
+    "info": {
+        "_postman_id": "8f178b3b-ee17-4c11-8d59-fdb44770a1ec",
+        "name": "Sl DEV",
+        "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "testpostman",
+            "item": [
+                {
+                    "name": "loanAgainstFdCreate",
+                    "id": "90d88d2d-8cb1-453c-84b4-c85d21df4253",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer 7c2840d1-09f2-34bc-8101-5601213214e4"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Cookie",
+                                "value": "incap_ses_966_2806735=kJITPy8o8HtHf99ws+xnDfljP2QAAAAA0ikqLXnPGhGu+DaKb2H97A==; visid_incap_2806735=3P8gf3UrSWeHOTo+P+KqsaDgL2QAAAAAQUIPAAAAAAAiF5ByP8M6/TOVT+1F2bux; visid_incap_2870965=aEynNGPJR4G5xchmk0Fm6JZqymMAAAAAQUIPAAAAAAC3cS8GEABrW9qGHPXNIFRP; visid_incap_2899458=C2DyWkncSkKEwST2AfJ5elDrF2QAAAAAQUIPAAAAAABCr+Lacn7g+c1+egYG1y/B"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n\n    \"channel\": \"OC\",\n\n    \"subChannel\": \"Ipay\",\n\n    \"referenceNo\": \"DCBL807516311\",\n\n    \"productCode\": \"FD\",\n\n    \"subType\": \"F\",\n\n    \"branchCode\": \"999\",\n\n    \"meCode\": \"AWM\",\n\n    \"nicNo\": \"841972732V\",\n\n    \"paymentType\": \"00\",\n\n    \"paymentMethod\": \"S\",\n\n    \"sector\": \"1600\",\n\n    \"subSector\": \"09\",\n\n    \"term\": \"60\",\n\n    \"rate\": \"17.5\",\n\n    \"savingsAccountNo\": \"01410000020\",\n\n    \"purposeOfFacility\": \"working capital\",\n\n    \"eligibleAmount\": \"750000.00\",\n\n    \"setOffAmount\": \"0\",\n\n    \"payOutAmount\": \"4350.00\",\n\n    \"fdLoanAmount\": \"4350.0\",\n\n    \"approvalStatus\": \"PR\",\n\n    \"fdList\": [\n\n        {\n\n            \"fdNo\": \"702462\",\n\n            \"fdStartDate\": \"2018-05-12\",\n\n            \"fdEndDate\": \"2023-05-12\",\n\n            \"noOfMonths\": \"60\",\n\n            \"fdAmount\": \"1000000.00\",\n\n            \"eligibleAmount\": \"750000.00\",\n\n            \"lienAmount\": \"4350.00\"\n\n        }\n\n    ]\n\n}"
+                        },
+                        "url": "https://clouddevapi.lolc.lk/iPay/ipayBankingModuleLOFC/1.0.0/loanAgainstFD/loanAgainstFdCreate"
+                    },
+                    "response": []
+                }
+            ],
+            "id": "05789930-3aa6-40c6-9304-d41762990d8e"
+        },
+        {
+            "name": "testpostmanv2",
+            "item": [
+                {
+                    "name": "customers",
+                    "id": "3fd383ea-e270-4a5f-95bd-f998d015d13a",
+                    "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                    },
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{localurlcallcenter}}17/customers/paginatedSearch?username=lahiru&offset=0&limit=9",
+                            "host": [
+                                "{{localurlcallcenter}}17"
+                            ],
+                            "path": [
+                                "customers",
+                                "paginatedSearch"
+                            ],
+                            "query": [
+                                {
+                                    "key": "username",
+                                    "value": "lahiru"
+                                },
+                                {
+                                    "key": "offset",
+                                    "value": "0"
+                                },
+                                {
+                                    "key": "limit",
+                                    "value": "9"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ],
+            "id": "359e1fab-2a8c-4a19-a688-c40162c40d81"
+        },
+        {
+            "name": "testv1",
+            "id": "4be1dbe5-de4f-4b3a-85c1-66620e212a91",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                    }
+                ],
+                "body": {
+                    "mode": "urlencoded",
+                    "urlencoded": [
+                        {
+                            "type": "text",
+                            "key": "grant_type",
+                            "value": "client_credentials"
+                        },
+                        {
+                            "type": "text",
+                            "key": "scope",
+                            "value": "openid"
+                        },
+                        {
+                            "type": "text",
+                            "key": "username",
+                            "value": "ipayuser"
+                        },
+                        {
+                            "type": "text",
+                            "key": "password",
+                            "value": "ipay@123$"
+                        }
+                    ]
+                },
+                "url": "http://35.247.158.73:8280/services/BankingServiceOAuth2CloudProxy"
+            },
+            "response": []
+        },
+        {
+            "name": "get fiction books",
+            "id": "53db1cbe-f90c-4cab-a537-58ccb0231bf6",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "https://library-api.postmanlabs.com/books?genre=fiction&checkedOut =false",
+                    "protocol": "https",
+                    "host": [
+                        "library-api",
+                        "postmanlabs",
+                        "com"
+                    ],
+                    "path": [
+                        "books"
+                    ],
+                    "query": [
+                        {
+                            "key": "genre",
+                            "value": "fiction"
+                        },
+                        {
+                            "key": "checkedOut ",
+                            "value": "false"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "get book by id",
+            "id": "f284674a-8329-4d82-984c-d80383c843a5",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "https://library-api.postmanlabs.com/books/:id",
+                    "protocol": "https",
+                    "host": [
+                        "library-api",
+                        "postmanlabs",
+                        "com"
+                    ],
+                    "path": [
+                        "books",
+                        ":id"
+                    ],
+                    "variable": [
+                        {
+                            "key": "id",
+                            "value": "29cd820f-82f9-4b45-a7f4-0924111b5b89"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "add a book",
+            "id": "c275ec0d-6e74-4617-88b0-9d5f28a705a3",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "api-key",
+                        "value": "postmanrulz",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n  \"title\": \"How To Kill\",\r\n  \"author\": \"Harper\",\r\n  \"genre\": \"fiction\",\r\n  \"yearPublished\": 1960\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": "https://library-api.postmanlabs.com/books"
+            },
+            "response": []
+        }
+    ]
 }
