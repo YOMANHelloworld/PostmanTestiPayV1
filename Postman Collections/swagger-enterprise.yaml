@@ -1,0 +1,3652 @@
+swagger: '2.0'
+info:
+  version: v1
+  title: iPay Enterprise Merchant API
+host: api.ipay
+basePath: /api.ipay/coopmerchants
+paths:
+  '/{id}/upload-txns':
+    post:
+      description: upload transactions to proceed
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant user Id
+          required: true
+          type: integer
+        - name: fileUpload
+          in: body
+          description: File Upload
+          required: true
+          schema:
+            properties:
+              filePath:
+                type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                $ref: '#/definitions/CorperateTransactionUploadResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/transactions':
+    get:
+      description: get transactions
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant user Id
+          required: true
+          type: integer
+        - name: paymentType
+          in: query
+          description: payment type
+          required: false
+          type: string
+        - name: limit
+          in: query
+          description: limit
+          required: false
+          type: string
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: payment type
+          required: false
+          type: string
+        - name: status
+          in: query
+          description: payment type
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                $ref: '#/definitions/CooperateTransactionPagination'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/transactions/{transactionId}/approve':
+    put:
+      description: approve transactions
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant user Id
+          required: true
+          type: integer
+        - name: transactionId
+          in: path
+          description: coop merchant transaction Id
+          required: true
+          type: integer
+        - name: commission
+          in: body
+          description: File Upload
+          required: true
+          schema:
+            properties:
+              isApproved:
+                type: string
+              remark:
+                type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                $ref: '#/definitions/CorperateTransactionApprovalResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/search':
+    get:
+      description: get coop merchant by code of name
+      parameters:
+        - name: name
+          in: query
+          description: merchant name
+          required: false
+          type: string
+        - name: code
+          in: query
+          description: coop merchant code
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                $ref: '#/definitions/CoopMerchantResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/users/status':
+    get:
+      description: get coop merchant user
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: username
+          in: query
+          description: coop merchant username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                $ref: '#/definitions/CoopMerchantUserStatusResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/users/search':
+    get:
+      description: get coop merchant user
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: username
+          in: query
+          description: coop merchant username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                $ref: '#/definitions/CoopMerchantUserResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/users/{userId}/roles':
+    get:
+      description: get coop merchant user roles
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: userId
+          in: path
+          description: coop merchant user id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopMerchantUserRoleResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/transactions/history':
+    get:
+      description: get coop merchant's received utility payments
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: limit
+          in: query
+          description: Limit
+          required: false
+          type: integer
+          format: integer
+        - name: offset
+          in: query
+          description: Offset
+          required: false
+          type: integer
+          format: integer
+        - name: fromDate
+          in: query
+          description: From Date
+          required: false
+          type: string
+          format: date
+        - name: toDate
+          in: query
+          description: To Date
+          required: false
+          type: string
+          format: date
+        - name: order
+          in: query
+          description: Ascending / Descending Order of records (ASC/DESC)
+          required: false
+          type: integer
+          format: integer
+        - name: status
+          in: query
+          description: Transaction status
+          required: false
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/TransactionHistory'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/create':
+    post:
+      description: Create Bill Type
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: coopBillTypeRequest
+          in: body
+          description: Coop Bill Type Request Payload
+          required: true
+          schema:
+           $ref: '#/definitions/CoopBillTypeRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                $ref: '#/definitions/CoopBillTypeResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/{coopBillTypeId}':
+    get:
+      description: get coop bill type
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: coopBillTypeId
+          in: path
+          description: Coop Bill Type Id
+          required: true
+          type: number
+          format: integer
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                  $ref: '#/definitions/CoopBillTypeResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    put:
+      description: update coop bill type
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: coopBillTypeId
+          in: path
+          description: Coop Bill Type Id
+          required: true
+          type: number
+          format: integer
+        - name: coopBillTypeRequest
+          in: body
+          description:  Coop Bill Type Payload
+          required: true
+          schema:
+            $ref: '#/definitions/CoopBillTypeRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                  $ref: '#/definitions/CoopBillTypeResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/coopBillType':
+    get:
+      description: get coop bill types
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopBillTypeResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+
+  '/{id}/coopBill/summaryDetail':
+    get:
+      description: get coop bill summary
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: fromDate
+          in: query
+          description: From Date
+          required: false
+          type: string
+          format: date
+        - name: toDate
+          in: query
+          description: To Date
+          required: false
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/BillDetailSummaryResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/billDetail':
+    get:
+      description: get coop bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: limit
+          in: query
+          description: limit
+          required: false
+          type: string
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: order
+          required: false
+          type: string
+        - name: status
+          in: query
+          description: status
+          required: false
+          type: string
+        - name: batchNo
+          in: query
+          description: batchNo
+          required: false
+          type: string
+        - name: paymentStatus
+          in: query
+          description: payment Status
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopBillExecutionResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/billPresentedCustomer':
+    get:
+      description: get bill Presented Customers
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/BillPresentedCustomerResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    post:
+      description: Update Bill Presented Customer
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: billPresentedCustomerId
+          in: path
+          description: bill Presented Customer Id
+          required: true
+          type: number
+          format: integer
+        - name: billPresentedCustomerRequest
+          in: body
+          description:  Bill Presented Customer Payload
+          required: true
+          schema:
+            $ref: '#/definitions/BillPresentedCustomerRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                  $ref: '#/definitions/BillPresentedCustomerResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/billPresentedCustomer/{billPresentedCustomerId}':
+    get:
+      description: get coop bill type
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: billPresentedCustomerId
+          in: path
+          description: bill Presented Customer Id
+          required: true
+          type: number
+          format: integer
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                  $ref: '#/definitions/BillPresentedCustomerResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    put:
+      description: Update Bill Presented Customer
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: billPresentedCustomerId
+          in: path
+          description: bill Presented Customer Id
+          required: true
+          type: number
+          format: integer
+        - name: billPresentedCustomerRequest
+          in: body
+          description:  Bill Presented Customer Payload
+          required: true
+          schema:
+            $ref: '#/definitions/BillPresentedCustomerRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                  $ref: '#/definitions/BillPresentedCustomerResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/billExecution':
+    post:
+      description: Execute bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: coopBillExecutionRequest
+          in: body
+          description: Coop Bill Execution Payload
+          required: true
+          schema:
+           $ref: '#/definitions/CoopBillExecutionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                $ref: '#/definitions/BillExecutionSaveResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/changeStatus':
+    put:
+      description: Change Coop Bill Change Status
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: coopBillChangeStatusRequest
+          in: body
+          description: Coop Bill Change Status Payload
+          required: true
+          schema:
+           $ref: '#/definitions/CoopBillChangeStatusRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopBillApproveResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/add-txn':
+    post:
+      description: Add individual transaction
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: individualCoopPaymentRequest
+          in: body
+          description: individual Coop Payment Request payload
+          required: true
+          schema:
+           $ref: '#/definitions/IndividualCoopPaymentRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CorperateTransactionUploadResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/transactions/summaryDetail':
+    get:
+      description: get coop merchant Payment summary
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: fromDate
+          in: query
+          description: From Date
+          required: false
+          type: string
+          format: date
+        - name: toDate
+          in: query
+          description: To Date
+          required: false
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/MerchantPaymentSummaryResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/viewBills':
+    get:
+      description: get coop bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: limit
+          in: query
+          description: limit
+          required: false
+          type: string
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: order
+          required: false
+          type: string
+        - name: status
+          in: query
+          description: status
+          required: false
+          type: string
+        - name: batchNo
+          in: query
+          description: batchNo
+          required: false
+          type: string
+        - name: paymentStatus
+          in: query
+          description: payment Status
+          required: false
+          type: string
+        - name: customerId
+          in: query
+          description: customer Id
+          required: false
+          type: string
+        - name: billReference
+          in: query
+          description: bill Reference
+          required: false
+          type: string
+        - name: fromDate
+          in: query
+          description: From Date
+          required: false
+          type: string
+          format: date
+        - name: toDate
+          in: query
+          description: To Date
+          required: false
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopBillExecutionResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+
+  '/{id}/coopBill/dashboardDetail':
+    get:
+      description: get coop bill summary
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: fromDate
+          in: query
+          description: From Date
+          required: false
+          type: string
+          format: date
+        - name: toDate
+          in: query
+          description: To Date
+          required: false
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopDashboardResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/users':
+    get:
+      description: get coop merchant users
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: limit
+          in: query
+          description: limit
+          required: false
+          type: string
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopMerchantUserResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    post:
+      description: Add Users to the Cooperate Merchant
+      parameters:
+        - name: merchantId
+          in: path
+          description: Merchant ID
+          required: true
+          type: integer
+          format: integer
+        - name: username
+          in: formData
+          description: Username
+          required: true
+          type: string
+          format: string
+        - name: firstName
+          in: formData
+          description: First Name
+          required: true
+          type: string
+          format: string
+        - name: lastName
+          in: formData
+          description: Last Name
+          required: true
+          type: string
+          format: string
+        - name: mobileNo
+          in: formData
+          description: Mobile No
+          required: true
+          type: string
+          format: string
+        - name: email
+          in: formData
+          description: Email
+          required: true
+          type: string
+          format: string
+        - name: employeeNo
+          in: formData
+          description: Employee No
+          required: true
+          type: string
+          format: string
+        - name: roleIdList
+          in: formData
+          description: Role Id List
+          required: true
+          type: integer
+          format: integer
+        - name: activate
+          in: formData
+          description: Activate or Not (true or false)
+          required: true
+          type: boolean
+          format: boolean
+        - name: profilePic
+          in: formData
+          description: Profile Picture
+          required: true
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: object
+                properties:
+                  message:
+                    type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/users/{userId}':
+    get:
+      description: get coop merchant user
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: userId
+          in: path
+          description: user Id
+          required: true
+          type: number
+          format: integer
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                  $ref: '#/definitions/CoopMerchantUserResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    put:
+      description: Update Cooperate Merchant user
+      parameters:
+        - name: id
+          in: path
+          description: Login user ID
+          required: true
+          type: integer
+          format: integer
+        - name: userId
+          in: path
+          description: Cooperate Merchant user ID
+          required: true
+          type: integer
+          format: integer
+        - name: firstName
+          in: formData
+          description: First Name of the user
+          required: false
+          type: string
+          format: string
+        - name: lastName
+          in: formData
+          description: Last Name of the user
+          required: false
+          type: string
+          format: string
+        - name: mobileNo
+          in: formData
+          description: mobile no of the user
+          required: false
+          type: string
+          format: string
+        - name: email
+          in: formData
+          description: email of the user
+          required: false
+          type: string
+          format: string
+        - name: roleIdList
+          in: formData
+          description: role id list
+          required: false
+          type: array
+          items:
+            type: integer
+        - name: status
+          in: formData
+          description: Status
+          required: false
+          type: string
+          format: string
+        - name: profilePic
+          in: formData
+          description: Profile Pic of the user
+          required: false
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              message:
+                type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/users/{userId}/status':
+    put:
+      description: Activate/Deactive Cooperate Merchant User Account
+      parameters:
+        - name: id
+          in: path
+          description: Cooperate Merchant User ID
+          required: true
+          type: integer
+          format: integer
+        - name: userId
+          in: path
+          description: User Id
+          required: true
+          type: integer
+          format: integer
+        - name: action
+          in: formData
+          description: action
+          required: true
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: object
+                properties:
+                  message:
+                    type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/billPresentedCustomer/{billPresentedCustomerId}/Bills':
+    get:
+      description: get coop bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: billPresentedCustomerId
+          in: path
+          description: bill Presented Customer Id
+          required: true
+          type: number
+          format: integer
+        - name: limit
+          in: query
+          description: limit
+          required: false
+          type: string
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: order
+          required: false
+          type: string
+        - name: paymentStatus
+          in: query
+          description: paymentStatus
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopBillExecutionResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/getCoopBill/{coopBillId}':
+    get:
+      description: get coop bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: coopBillId
+          in: path
+          description: Bill Id
+          required: true
+          type: number
+          format: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                  $ref: '#/definitions/CoopBillExecutionResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/billPresentedCustomer/{billPresentedCustomerId}/outstanding':
+    get:
+      description: get coop bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: billPresentedCustomerId
+          in: path
+          description: bill Presented Customer Id
+          required: true
+          type: number
+          format: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopMerchantOutstandingResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/roles':
+    get:
+      description: get coop merchant roles
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: merchantTypeId
+          in: path
+          description: Coop Merchant Type Id
+          required: true
+          type: number
+          format: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                  $ref: '#/definitions/MerchantRoleResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/users/{userId}/password':
+    put:
+      description: Change Password for cooperate merchant user
+      parameters:
+        - name: id
+          in: path
+          description: Cooperate Merchant ID
+          required: true
+          type: integer
+          format: integer
+        - name: userId
+          in: path
+          description: Merchant User ID
+          required: true
+          type: integer
+          format: integer
+        - name: username
+          in: formData
+          description: Username of the cooperate merchant user
+          required: true
+          type: string
+          format: string
+        - name: newPassword
+          in: formData
+          description: New Password of the cooperate merchant user
+          required: true
+          type: string
+          format: string
+        - name: oldPassword
+          in: formData
+          description: Old Password of the cooperate merchant user
+          required: true
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: object
+                properties:
+                  message:
+                    type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/forgotpassword/initiateNewPassword':
+    post:
+      description: Initiate New Password
+      parameters:
+        - name: username
+          in: formData
+          description: username
+          required: true
+          type: string
+          format: string
+        - name: phone
+          in: formData
+          description: phone
+          required: true
+          type: string
+          format: string
+        - name: email
+          in: formData
+          description: email
+          required: true
+          type: string
+          format: string
+        - name: platform
+          in: formData
+          description: platform
+          required: true
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                properties:
+                  message:
+                    type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/forgotpassword/otpVerification':
+    post:
+      description: Initiate New Password
+      parameters:
+        - name: otp
+          in: formData
+          description: ONE TIME PASSWORD
+          required: true
+          type: string
+          format: string
+        - name: username
+          in: formData
+          description: username
+          required: true
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                properties:
+                  message:
+                    type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/forgotpassword/initiateNewPasswordResend':
+    post:
+      description: Initiate New Password
+      parameters:
+        - name: username
+          in: formData
+          description: username
+          required: true
+          type: string
+          format: string
+        - name: phone
+          in: formData
+          description: phone
+          required: true
+          type: string
+          format: string
+        - name: email
+          in: formData
+          description: email
+          required: true
+          type: string
+          format: string
+        - name: platform
+          in: formData
+          description: platform
+          required: true
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                properties:
+                  message:
+                    type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/forgotpassword/getMobileNumberAndEmailByUserName/{username}':
+    get:
+      description: Get Merchant Mobile Number And Email By UserName
+      parameters:
+        - name: username
+          in: path
+          description: Merchant username
+          required: true
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                properties:
+                  phone:
+                    type: string
+                  email:
+                    type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/users/forgotpassword/update':
+    post:
+      description: Update forgotton Password
+      parameters:
+        - name: username
+          in: formData
+          description: username of the merchant user
+          required: true
+          type: string
+          format: string
+        - name: confirmationCode
+          in: formData
+          description: Confirmation Code received
+          required: true
+          type: string
+          format: string
+        - name: newPassword
+          in: formData
+          description: New Password
+          required: true
+          type: string
+          format: string
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                properties:
+                  message:
+                    type: string
+      x-auth-type: Application
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/{coopBillId}/billExecution':
+
+    put:
+      description: Update Bill Presented Customer
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: coopBillId
+          in: path
+          description: bill Id
+          required: true
+          type: number
+          format: integer
+        - name: coopBillExecutionUpdateRequest
+          in: body
+          description: Bill Update Request
+          required: true
+          schema:
+            $ref: '#/definitions/CoopBillExecutionUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                  $ref: '#/definitions/CoopBillExecutionResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/recurring':
+    post:
+      description: Create Recurring bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: recurringBillCreateRequest
+          in: body
+          description: Coop Recurring Bill Payload
+          required: true
+          schema:
+           $ref: '#/definitions/RecurringBillCreateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                $ref: '#/definitions/RecurringBillSaveResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/recurring/billDetail':
+    get:
+      description: get coop recurring bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: limit
+          in: query
+          description: limit
+          required: false
+          type: string
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: order
+          required: false
+          type: string
+        - name: status
+          in: query
+          description: status
+          required: false
+          type: string
+        - name: batchNo
+          in: query
+          description: batchNo
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/RecuringBillResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/recurring/changeStatus':
+    put:
+      description: Change Coop Recurring Bill Change Status
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: coopBillChangeStatusRequest
+          in: body
+          description: Coop Bill Change Status Payload
+          required: true
+          schema:
+           $ref: '#/definitions/CoopBillChangeStatusRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopBillApproveResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopCustomer/customerBulkSave':
+    post:
+      description: Execute bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: customerBulkRequest
+          in: body
+          description: customerBulkRequest Payload
+          required: true
+          schema:
+           $ref: '#/definitions/CustomerBulkRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              message:
+                type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/recurring/{billId}':
+    get:
+      description: Create Recurring bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: billId
+          in: path
+          description: coop bill Id
+          required: true
+          type: number
+          format: integer
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                $ref: '#/definitions/RecuringBillResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+    put:
+      description: Create Recurring bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: billId
+          in: path
+          description: coop bill Id
+          required: true
+          type: number
+          format: integer
+        - name: recurringBillUpdateRequest
+          in: body
+          description: Coop Bill Change Status Payload
+          required: true
+          schema:
+           $ref: '#/definitions/RecurringBillUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                $ref: '#/definitions/RecuringBillResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/recurring/billDetail/processingStatus':
+    get:
+      description: get coop recurring bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: limit
+          in: query
+          description: limit
+          required: false
+          type: string
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: order
+          required: false
+          type: string
+        - name: status
+          in: query
+          description: Processing Status
+          required: false
+          type: string
+        - name: batchNo
+          in: query
+          description: batchNo
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/RecuringBillResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/manualPayment':
+    put:
+      description: Manual Payment Update Request
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: manualPaymentUpdateRequest
+          in: body
+          description: Bill Update Request
+          required: true
+          schema:
+            $ref: '#/definitions/ManualPaymentUpdateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                  $ref: '#/definitions/ManualPaymentUpdateResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopCustomer/customerBulkSaveValidation':
+    post:
+      description: Execute bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: customerBulkRequest
+          in: body
+          description: customerBulkRequest Payload
+          required: true
+          schema:
+           $ref: '#/definitions/CustomerBulkRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              message:
+                type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{customerId}/customer_referral/save':
+    post:
+      description: Execute bills
+      parameters:
+        - name: customerId
+          in: path
+          description: customerId id
+          required: true
+          type: number
+          format: integer
+        - name: productReferralDetailsRequest
+          in: body
+          description: Product Referral Details Request Payload
+          required: true
+          schema:
+           $ref: '#/definitions/ProductReferralDetailsRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              message:
+                type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/bulkBillExecution':
+    post:
+      description: Execute bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: coopBillExecutionRequest
+          in: body
+          description: customerBulkRequest Payload
+          required: true
+          schema:
+           $ref: '#/definitions/CoopBillExecutionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              message:
+                type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/recurringBulk':
+    post:
+      description: Execute bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: coopBillExecutionRequest
+          in: body
+          description: RecurringBillCreateRequest Payload
+          required: true
+          schema:
+           $ref: '#/definitions/RecurringBillCreateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              message:
+                type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/accounts/balance':
+    get:
+      description: Get Corporate Merchant Balance
+      parameters:
+        - name: id
+          in: path
+          description: corporate merchant Id
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                $ref: '#/definitions/CorporateMerchantBalanceResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/transactions/fundFransfer':
+    post:
+      description: Create Coop Fund Transfer
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: requests
+          in: body
+          description: Coop Bill Fund Transfer Payment Request Payload
+          required: true
+          schema:
+           $ref: '#/definitions/CoopBillFundTransferPaymentRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CorperateTransactionUploadResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/transactions/billPayment':
+    post:
+      description: Create Coop Bill Payments
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: requests
+          in: body
+          description: Coop Bill Fund Transfer Payment Request Payload
+          required: true
+          schema:
+           $ref: '#/definitions/CoopBillPaymentRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CorperateTransactionUploadResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/utilityMerchantList':
+    get:
+      description: Get all utility merchants
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: integer
+          format: integer
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/UtilityMerchantResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopSuppliers/billbulk':
+    post:
+      description: Execute bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: CoopSuppliersBillsCreateRequest
+          in: body
+          description: CoopSuppliersBillsCreateRequest Payload
+          required: true
+          schema:
+           $ref: '#/definitions/CoopSuppliersBillsCreateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              message:
+                type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopSuppliers/fundsbulk':
+    post:
+      description: Execute bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+        - name: CoopSuppliersFundsCreateRequest
+          in: body
+          description: CoopSuppliersFundsCreateRequest Payload
+          required: true
+          schema:
+           $ref: '#/definitions/CoopSuppliersFundsCreateRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              message:
+                type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/banks?action=ftrBanks':
+    get:
+      description: Get Banks
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: number
+          format: integer
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/Bank'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/enterprise/payments/view':
+    get:
+      description: get coop recurring bills
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: limit
+          in: query
+          description: limit
+          required: false
+          type: string
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: order
+          required: false
+          type: string
+        - name: status
+          in: query
+          description: Status
+          required: false
+          type: string
+        - name: paymentStatus
+          in: query
+          description: payment Status
+          required: false
+          type: string
+        - name: batchNo
+          in: query
+          description: batchNo
+          required: false
+          type: string
+        - name: utilityMerchant
+          in: query
+          description: utility Merchant code
+          required: false
+          type: string
+        - name: bankCode
+          in: query
+          description: bank Code
+          required: false
+          type: string
+        - name: fromDate
+          in: query
+          description: From Date
+          required: false
+          type: string
+          format: date
+        - name: toDate
+          in: query
+          description: To Date
+          required: false
+          type: string
+          format: date
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CooperateTransaction'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/enterprise/payments/transactionAudit':
+    get:
+      description: get audit trail of coopTransactoions
+      parameters:
+        - name: id
+          in: path
+          description: coop merchant id
+          required: true
+          type: string
+        - name: limit
+          in: query
+          description: limit
+          required: false
+          type: string
+        - name: offset
+          in: query
+          description: offset
+          required: false
+          type: string
+        - name: order
+          in: query
+          description: order
+          required: false
+          type: string
+        - name: status
+          in: query
+          description: Status
+          required: false
+          type: string
+        - name: txnId
+          in: query
+          description: Txn Id
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CooperateTransactionAudit'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/createpayByLink':
+    post:
+      description: Create dynamic URL request
+      parameters:
+        - name: id
+          in: path
+          description: Merchant ID
+          required: true
+          type: integer
+        - name: customerDynamicUrlMappingRequest
+          in: body
+          description: merchant request for creating dynamic URL
+          required: true
+          schema:
+            $ref: '#/definitions/CustomerDynamicUrlMappingRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: object
+                properties:
+                  message:
+                    type: string
+          x-auth-type: Application & Application User
+          x-throttling-tier: Unlimited
+  '/{id}/dualAuthorization':
+    put:
+      description: Change Dual Authorization Status
+      parameters:
+        - name: id
+          in: path
+          description: Cooperate Merchant User ID
+          required: true
+          type: integer
+          format: integer
+        - name: dualAuthorizationStatusChangeRequest
+          in: body
+          description: request for change authorizationstatus
+          required: true
+          schema:
+            $ref: '#/definitions/DualAuthorizationStatusChangeRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: object
+                properties:
+                  message:
+                    type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/createpayByLink/{requestId}':
+    put:
+      description:  dynamic URL request cancellation
+      parameters:
+        - name: id
+          in: path
+          description: Merchant ID
+          required: true
+          type: integer
+        - name: requestId
+          in: path
+          description: request ID
+          required: true
+          type: integer
+
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              message:
+                type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/getPayByLinkRequest':
+    get:
+      description: get dynamic URL request from reference
+      parameters:
+        - name: id
+          in: path
+          description: Customer ID
+          required: true
+          type: integer
+        - name: referenceNo
+          in: query
+          description: reference No
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/DynamicUrlMerchantRequest'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/createBulkPayByLink/{userId}':
+    post:
+      description: Create bulk dynamic URL request
+      parameters:
+        - name: id
+          in: path
+          description: Merchant ID
+          required: true
+          type: integer
+        - name: userId
+          in: path
+          description: User ID
+          required: true
+          type: integer
+        - name: requestBulkExecutionRequest
+          in: body
+          description: merchant request for creating bulk dynamic URL
+          required: true
+          schema:
+            $ref: '#/definitions/RequestBulkExecutionRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              message:
+                type: string
+  '/{id}/payByLink/requests':
+    get:
+      description: get dynamic URL requests
+      parameters:
+        - name: id
+          in: path
+          description: Customer ID
+          required: true
+          type: integer
+        - name: limit
+          in: query
+          description: limit
+          required: true
+          type: integer
+        - name: offset
+          in: query
+          description: offset
+          required: true
+          type: integer
+        - name: order
+          in: query
+          description: order
+          required: true
+          type: string
+        - name: status
+          in: query
+          description: status
+          required: true
+          type: string
+        - name: batchNo
+          in: query
+          description: batch no
+          required: true
+          type: string
+        - name: mobileNo
+          in: query
+          description: mobile no
+          required: true
+          type: string
+        - name: email
+          in: query
+          description: email
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/DynamicUrlMerchantRequest'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/payByLink/{userId}/changeStatus':
+    put:
+      description:  dynamic URL request cancellation
+      parameters:
+        - name: id
+          in: path
+          description: Merchant ID
+          required: true
+          type: integer
+        - name: userId
+          in: path
+          description: User ID
+          required: true
+          type: integer
+        - name: paymentRequestChangeStatusRequest
+          in: body
+          description: request for change payment request status
+          required: true
+          schema:
+            $ref: '#/definitions/PaymentRequestChangeStatusRequest'
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              message:
+                type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/payByLink/viewRequests':
+    get:
+      description: get dynamic URL requests
+      parameters:
+        - name: id
+          in: path
+          description: Customer ID
+          required: true
+          type: integer
+        - name: limit
+          in: query
+          description: limit
+          required: true
+          type: integer
+        - name: offset
+          in: query
+          description: offset
+          required: true
+          type: integer
+        - name: order
+          in: query
+          description: order
+          required: true
+          type: string
+        - name: status
+          in: query
+          description: status
+          required: true
+          type: string
+        - name: batchNo
+          in: query
+          description: batch no
+          required: true
+          type: string
+        - name: mobileNo
+          in: query
+          description: mobile no
+          required: true
+          type: string
+        - name: email
+          in: query
+          description: email
+          required: true
+          type: string
+        - name: expiryDate
+          in: query
+          description: Expiry Date
+          required: true
+          type: string
+        - name: dueDate
+          in: query
+          description: Due Date
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/DynamicUrlMerchantRequest'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/payByLinkAuditTrail':
+    get:
+      description: get dynamic URL request from reference
+      parameters:
+        - name: id
+          in: path
+          description: Merchant ID
+          required: true
+          type: integer
+        - name: requestId
+          in: query
+          description: Request No
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/DynamicURLMappingAuditResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/utilityDashboard/paymentSummary':
+    get:
+      description: get utility dashboard summary details
+      parameters:
+        - name: id
+          in: path
+          description: Merchant ID
+          required: true
+          type: integer
+        - name: month
+          in: query
+          description: Month
+          required: true
+          type: string
+        - name: year
+          in: query
+          description: Year
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopUtilityDashboardTxnDetails'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/utilityDashboard/lineChart':
+    get:
+      description: utility dashboard line chart details
+      parameters:
+        - name: id
+          in: path
+          description: Merchant ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopUtilityDashboardChartResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/utilityDashboard/barChart':
+    get:
+      description: utility dashboard line chart details
+      parameters:
+        - name: id
+          in: path
+          description: Merchant ID
+          required: true
+          type: integer
+        - name: monthRange
+          in: query
+          description: Month Range
+          required: true
+          type: integer
+        - name: year
+          in: query
+          description: Year
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopUtilityDashboardChartResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/coopBill/utilityDashboard/pieChart':
+    get:
+      description: utility dashboard line chart details
+      parameters:
+        - name: id
+          in: path
+          description: Merchant ID
+          required: true
+          type: integer
+        - name: month
+          in: query
+          description: Month Range
+          required: true
+          type: integer
+        - name: year
+          in: query
+          description: Year
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: array
+                items:
+                  $ref: '#/definitions/CoopUtilityDashboardChartResponse'
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+  '/{id}/payByLinks/maximumExpDays':
+    get:
+      description: Get PBL Maximu Expiry Days for Coop Merchant
+      parameters:
+        - name: id
+          in: path
+          description: Coop Merchant ID
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: Successful Response
+          schema:
+            title: IpayResponse
+            type: object
+            properties:
+              responseCode:
+                type: string
+              responseObject:
+                type: object
+                properties:
+                  pblExpirationMaxDays:
+                    type: string
+      x-auth-type: Application & Application User
+      x-throttling-tier: Unlimited
+definitions:
+  CorperateTransactionUploadResponse:
+    type: object
+    properties:
+      overallStatus:
+        type: string
+      transctions:
+        type: array
+        items:
+          $ref: '#/definitions/CooperateTransaction'
+  CooperateTransaction:
+    type: object
+    properties:
+      id:
+        type: number
+      toAccountNo:
+        type: string
+      bankCode:
+        type: string
+      bankName:
+        type: string
+      txnAmount:
+        type: string
+      beneficiaryName:
+        type: string
+      remark:
+        type: string
+      paymentType:
+        type: string
+      utilityMerchantCode:
+        type: string
+      utilityAccountNo:
+        type: string
+      currentStatus:
+        type: string
+      currentMessage:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+  CorperateTransactionApprovalResponse:
+    type: object
+    properties:
+      message:
+        type: string
+  CoopMerchantResponse:
+    type: object
+    properties:
+      id:
+        type: number
+      code:
+        type: string
+      description:
+        type: string
+      logoImagePath:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+  CoopMerchantUserStatusResponse:
+    type: object
+    properties:
+      status:
+        type: string
+      description:
+        type: string
+      accountRecoveryEnabled:
+        type: string
+  CoopMerchantUserRoleResponse:
+    type: object
+    properties:
+      id:
+        type: number
+      roleName:
+        type: string
+      roleDescription:
+        type: string
+      roleType:
+        type: string
+      permissions:
+        type: array
+        items:
+          $ref: '#/definitions/CoopRolepermission'
+  CoopRolepermission:
+    type: object
+    properties:
+      id:
+        type: number
+      code:
+        type: string
+      description:
+        type: string
+      actionMapping:
+        type: string
+  CoopMerchantUserResponse:
+    type: object
+    properties:
+      id:
+        type: number
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phone:
+        type: string
+      status:
+        type: string
+      email:
+        type: string
+      username:
+        type: string
+      profilePic:
+        type: string
+  CooperateTransactionPagination:
+    type: object
+    properties:
+      count:
+        type: number
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/CooperateTransaction'
+  TransactionHistory:
+    type: object
+    properties:
+      transactionId:
+        type: integer
+      payer:
+        type: string
+      payee:
+        type: string
+      amount:
+        type: number
+      status:
+        type: string
+      createdDate:
+        type: string
+      modifiedDate:
+        type: string
+      remark:
+        type: string
+  CoopBillTypeRequest:
+    type: object
+    properties:
+      id:
+        type: number
+      code:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+      coopMerchantId:
+        type: number
+  CoopBillTypeResponse:
+    type: object
+    properties:
+      id:
+        type: number
+      code:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+      coopMerchant:
+        type: string
+      createdDate:
+        type: string
+      createdBy:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+  BillDetailSummaryResponse:
+    type: object
+    properties:
+      type:
+        type: string
+      count:
+        type: string
+      total:
+        type: string
+  CoopBillExecutionResponse:
+    type: object
+    properties:
+      id:
+        type: number
+      coopBillType:
+        type: string
+      billPresentedCustomer:
+        type: string
+      billReference:
+        type: string
+      batchNo:
+        type: string
+      amount:
+        type: string
+      paymentStatus:
+        type: string
+      executionStatus:
+        type: string
+      billDate:
+        type: string
+      mode:
+        type: string
+      nextDueDate:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+      expiryDate:
+        type: string
+      requestURL:
+        type: string
+  BillPresentedCustomerResponse:
+    type: object
+    properties:
+      id:
+        type: number
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phone:
+        type: string
+      status:
+        type: string
+      referenceCode:
+        type: string
+      email:
+        type: string
+      billPresentedMerchant:
+        type: string
+      createdDate:
+        type: string
+      createdBy:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+  BillPresentedCustomerRequest:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      phone:
+        type: string
+      status:
+        type: string
+      referenceCode:
+        type: string
+      email:
+        type: string
+      billPresentedMerchant:
+        type: string
+  CoopBillExecutionRequest:
+    type: object
+    properties:
+      batchNo:
+        type: string
+      mode:
+        type: string
+      coopBillTypeId:
+        type: integer
+      coopBillExecutionDetail:
+        type: array
+        items:
+          $ref: '#/definitions/CoopBillExecutionDetail'
+  CoopBillExecutionDetail:
+    type: object
+    properties:
+      billPresentedCustomerId:
+        type: number
+      referenceNo:
+        type: string
+      batchNo:
+        type: string
+      paymentStatus:
+        type: string
+      executionStatus:
+        type: string
+      amount:
+        type: string
+      billDate:
+        type: string
+      dueDate:
+        type: string
+      customerMobileNo:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+  BillExecutionSaveResponse:
+    type: object
+    properties:
+      error:
+        type: string
+      responseMessage:
+        type: string
+      coopBillExecutionDetail:
+        type: array
+        items:
+          $ref: '#/definitions/CoopBillExecutionResponse'
+  CoopBillApproveResponse:
+    type: object
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+  CoopBillChangeStatusRequest:
+    type: object
+    properties:
+      status:
+        type: string
+      billExecutionIds:
+        type: integer
+      remark:
+        type: string
+  IndividualCoopPaymentRequest:
+    type: object
+    properties:
+      paymentType:
+        type: string
+      toAccountNo:
+        type: string
+      bankCode:
+        type: string
+      txnAmount:
+        type: string
+      beneficiaryName:
+        type: string
+      remark:
+        type: string
+      utilityMerchantCode:
+        type: string
+      utilityAccountNo:
+        type: string
+      batchNo:
+        type: string
+  MerchantPaymentSummaryResponse:
+    type: object
+    properties:
+      type:
+        type: string
+      count:
+        type: string
+      total:
+        type: string
+  CoopDashboardResponse:
+    type: object
+    properties:
+      paidAmount:
+        type: string
+      overDueAmount:
+        type: string
+      pendingAmount:
+        type: string
+  CoopMerchantOutstandingResponse:
+    type: object
+    properties:
+      billType:
+        type: string
+      outstandingAmount:
+        type: string
+      overDueAmount:
+        type: string
+      nextDueDate:
+        type: string
+  MerchantRoleResponse:
+    type: object
+    properties:
+      id:
+        type: number
+      roleName:
+        type: string
+      roleDescription:
+        type: string
+      roleType:
+        type: string
+      permissions:
+        type: array
+        items:
+          $ref: '#/definitions/MerchantPermissionResponse'
+
+  MerchantPermissionResponse:
+    type: object
+    properties:
+      id:
+        type: number
+      code:
+        type: string
+      description:
+        type: string
+      actionMapping:
+        type: string
+  CoopBillExecutionUpdateRequest:
+    type: object
+    properties:
+      id:
+        type: number
+      coopBillType:
+        type: string
+      billPresentedCustomer:
+        type: string
+      batchNo:
+        type: string
+      amount:
+        type: string
+      nextDueDate:
+        type: string
+      mode:
+        type: string
+  RecurringBillCreateRequest:
+    type: object
+    properties:
+      batchNo:
+        type: string
+      mode:
+        type: string
+      coopBillTypeId:
+        type: integer
+      recurringBillCreateRequest:
+        type: array
+        items:
+          $ref: '#/definitions/RecurringBillDetailRequest'
+  RecurringBillDetailRequest:
+    type: object
+    properties:
+      billPresentedCustomerId:
+        type: number
+      referenceNo:
+        type: string
+      batchNo:
+        type: string
+      status:
+        type: string
+      amount:
+        type: string
+      endDate:
+        type: string
+      customerMobileNo:
+        type: string
+      executionDayOfWeek:
+        type: string
+      billDate:
+        type: string
+      executionDayOfMonth:
+        type: number
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+      billFrequency:
+        type: string
+      annualExDate:
+        type: string
+      firstBillDate:
+        type: string
+      noOfDatesToDue:
+        type: string
+  RecurringBillSaveResponse:
+    type: object
+    properties:
+      error:
+        type: string
+      responseMessage:
+        type: string
+      coopBillExecutionDetail:
+        type: array
+        items:
+          $ref: '#/definitions/RecuringBillResponse'
+
+  RecuringBillResponse:
+    type: object
+    properties:
+      id:
+        type: number
+      coopBillType:
+        type: string
+      billPresentedCustomerId:
+        type: number
+      referenceNo:
+        type: string
+      batchNo:
+        type: string
+      status:
+        type: string
+      amount:
+        type: string
+      endDate:
+        type: string
+      customerMobileNo:
+        type: string
+      executionDayOfWeek:
+        type: string
+      billDate:
+        type: string
+      executionDayOfMonth:
+        type: number
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+      billFrequency:
+        type: string
+      annualExDate:
+        type: string
+      firstBillDate:
+        type: string
+      noOfDatesToDue:
+        type: string
+      customerName:
+        type: string
+  CustomerBulkRequest:
+    type: object
+    properties:
+      billPresentedCustomerRequests:
+        type: array
+        items:
+          $ref: '#/definitions/BillPresentedCustomerRequest'
+  RecurringBillUpdateRequest:
+    type: object
+    properties:
+      billPresentedCustomerId:
+        type: number
+      referenceNo:
+        type: string
+      batchNo:
+        type: string
+      status:
+        type: string
+      amount:
+        type: string
+      endDate:
+        type: string
+      customerMobileNo:
+        type: string
+      executionDayOfWeek:
+        type: string
+      billDate:
+        type: string
+      executionDayOfMonth:
+        type: number
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+      lastModifiedBy:
+        type: string
+      lastModifiedDate:
+        type: string
+      billFrequency:
+        type: string
+      annualExDate:
+        type: string
+      firstBillDate:
+        type: string
+      noOfDatesToDue:
+        type: string
+  ManualPaymentUpdateRequest:
+    type: object
+    properties:
+      coopBillTypeId:
+        type: number
+      billPresentedCustomerId:
+        type: number
+      paymentMethod:
+        type: string
+      amount:
+        type: string
+  ManualPaymentUpdateResponse:
+    type: object
+    properties:
+      coopBillTypeId:
+        type: string
+      billPresentedCustomerId:
+        type: string
+      paymentMethod:
+        type: string
+      amount:
+        type: string
+      message:
+        type: string
+  ReferralProductByCustomerRequest:
+    type: object
+    properties:
+      productName:
+        type: string
+      remark:
+        type: string
+  ProductReferralDetailsRequest:
+    type: object
+    properties:
+      title:
+        type: string
+      fullName:
+        type: string
+      nic:
+        type: string
+      mobileNumber:
+        type: string
+      lolcFinanceBranch:
+        type: string
+      referralProductByCustomerRequest:
+        type: array
+        items:
+          $ref: '#/definitions/ReferralProductByCustomerRequest'
+  CorporateMerchantBalanceResponse:
+    type: object
+    properties:
+      balance:
+        type: string
+      plainAccountNo:
+        type: string
+      maskedAccountNo:
+        type: string
+  CoopBillPaymentRequest:
+    type: object
+    properties:
+      batchNo:
+        type: string
+      coopBillPayment:
+        type: array
+        items:
+          $ref: '#/definitions/CoopBillPayment'
+  CoopBillPayment:
+    type: object
+    properties:
+      utilityMerchantCode:
+        type: string
+      utilityAccountNo:
+        type: string
+      amount:
+        type: string
+      remark:
+        type: string
+  CoopBillFundTransferPaymentRequest:
+    type: object
+    properties:
+      batchNo:
+        type: string
+      cooperateTransactionFundTransfer:
+        type: array
+        items:
+          $ref: '#/definitions/CoopBillFundTransferPayment'
+  CoopBillFundTransferPayment:
+    type: object
+    properties:
+      toAccount:
+        type: string
+      bankCode:
+        type: string
+      beneficiaryName:
+        type: string
+      amount:
+        type: string
+      remark:
+        type: string
+  UtilityMerchantResponse:
+    type: object
+    properties:
+      utilityMerchantId:
+        type: integer
+      utilityMerchantName:
+        type: string
+      logo:
+        type: string
+      utilityCode:
+        type: string
+      utilityProviderId:
+        type: integer
+      referenceAccountLabel:
+        type: string
+  CoopSuppliersFundsCreateRequest:
+    type: object
+    properties:
+      batchNo:
+        type: string
+      paymentType:
+        type: string
+      cooperateTransactions:
+        type: array
+        items:
+          $ref: '#/definitions/CooperateTransaction'
+  Bank:
+    type: object
+    properties:
+      id:
+        type: integer
+      code:
+        type: string
+      logo:
+        type: string
+        format: 'byte[]'
+      url:
+        type: string
+      name:
+        type: string
+      shotrName:
+        type: string
+      accountRegexPattern:
+        type: string
+  CoopSuppliersBillsCreateRequest:
+    type: object
+    properties:
+      batchNo:
+        type: string
+      paymentType:
+        type: string
+      cooperateTransactions:
+        type: array
+        items:
+          $ref: '#/definitions/CooperateTransaction'
+  CooperateTransactionAudit:
+    type: object
+    properties:
+      id:
+        type: number
+      txnId:
+        type: number
+      toAccountNo:
+        type: string
+      bankCode:
+        type: string
+      bankName:
+        type: string
+      txnAmount:
+        type: string
+      beneficiaryName:
+        type: string
+      remark:
+        type: string
+      paymentType:
+        type: string
+      utilityMerchantCode:
+        type: string
+      utilityAccountNo:
+        type: string
+      currentStatus:
+        type: string
+      currentMessage:
+        type: string
+      createdBy:
+        type: string
+      createdDate:
+        type: string
+      transactionStatus:
+        type: string
+      approvalRemark:
+        type: string
+      batchNo:
+        type: string
+      message:
+        type: string
+      utilityMerchantName:
+        type: string
+      action:
+        type: string
+  CustomerDynamicUrlMappingRequest:
+    type: object
+    properties:
+      dynamicUrlTypeId:
+        type: integer
+      email:
+        type: string
+      mobileNo:
+        type: string
+      queryParam1Val:
+        type: string
+      queryParam2Val:
+        type: string
+      queryParam3Val:
+        type: string
+      queryParam4Val:
+        type: string
+      shortenUrl:
+        type: string
+      merchantId:
+        type: integer
+      expirayDates:
+        type: string
+      utilityMerchantId:
+        type: integer
+      utilityAccountNo:
+        type: string
+      merchantUserId:
+        type: integer
+      merchantBranchId:
+        type: integer
+      transmissionMode:
+        type: string
+      payByLinkDescription:
+        type: string
+      dueDate:
+        type: string
+      transactionAmount:
+        type: string
+  DynamicUrlMerchantRequest:
+    type: object
+    properties:
+      id:
+        type: integer
+      email:
+        type: string
+      mobileNo:
+        type: string
+      queryParam1Val:
+        type: string
+      queryParam2Val:
+        type: string
+      queryParam3Val:
+        type: string
+      queryParam4Val:
+        type: string
+      status:
+        type: string
+      merchantId:
+        type: integer
+      expirayDate:
+        type: string
+      merchantUserId:
+        type: integer
+      merchantBranchId:
+        type: integer
+      transmissionMode:
+        type: string
+      description:
+        type: string
+      dueDate:
+        type: string
+      createdDate:
+        type: string
+      createdUser:
+        type: string
+      merchantCardStatus:
+        type: string
+      transactionAmount:
+        type: string
+      paymentStatus:
+        type: string
+  DualAuthorizationStatusChangeRequest:
+    type: object
+    properties:
+      userId:
+        type: integer
+      status:
+        type: string
+  PaymentRequestChangeStatusRequest:
+    type: object
+    properties:
+      status:
+        type: string
+      billExecutionIds:
+        type: integer
+      remark:
+        type: string
+  RequestBulkExecutionRequest:
+    type: object
+    properties:
+      dynamicUrlTypeId:
+        type: integer
+      merchantId:
+        type: integer
+      expirayDates:
+        type: string
+      merchantUserId:
+        type: integer
+      merchantBranchId:
+        type: integer
+      transmissionMode:
+        type: string
+      payByLinkDescription:
+        type: integer
+      customerDynamicUrlMappingRequests:
+        type: array
+        items:
+          $ref: '#/definitions/CustomerDynamicUrlMappingRequest'
+  DynamicURLMappingAuditResponse:
+    type: object
+    properties:
+      actionDate:
+        type: string
+      actionBy:
+        type: string
+      action:
+        type: string
+      remark:
+        type: string
+  CoopUtilityDashboardTxnDetails:
+    type: object
+    properties:
+      totalPayments:
+        type: string
+      txnCount:
+        type: string
+      avgPayment:
+        type: string
+      totalPaymentsGrowth:
+        type: string
+      txnCountGrowth:
+        type: string
+      avgPaymentGrowth:
+        type: string
+  ChartDatasetModel:
+    type: object
+    properties:
+      name:
+        type: string
+      data:
+        type: array
+        items:
+          type: integer
+  CoopUtilityDashboardChartResponse:
+    type: object
+    properties:
+      labels:
+        type: array
+        items:
+          type: string
+      datasets:
+        type: array
+        items:
+          $ref: '#/definitions/ChartDatasetModel'
